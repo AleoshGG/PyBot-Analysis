@@ -80,13 +80,8 @@ class graphicsSQLAlchemy(IGraphics):
             print(f"🔍 DEBUG - Query result: {result}")
             
             if not result:
-                print("⚠️ No hay datos en la BD, retornando mock")
-                return [
-                    {"waste_type": "Plástico", "count": 150, "total_amount": 45.5},
-                    {"waste_type": "Papel", "count": 120, "total_amount": 38.2},
-                    {"waste_type": "Vidrio", "count": 80, "total_amount": 25.1},
-                    {"waste_type": "Metal", "count": 60, "total_amount": 18.7}
-                ]
+                print("⚠️ No hay datos en la BASE DE DATOS")
+                return []
             
             data = [
                 {
@@ -102,12 +97,7 @@ class graphicsSQLAlchemy(IGraphics):
         except SQLAlchemyError as e:
             session.rollback()
             print(f"❌ SQLAlchemy ERROR: {e}")
-            return [
-                {"waste_type": "Plástico", "count": 150, "total_amount": 45.5},
-                {"waste_type": "Papel", "count": 120, "total_amount": 38.2},
-                {"waste_type": "Vidrio", "count": 80, "total_amount": 25.1},
-                {"waste_type": "Metal", "count": 60, "total_amount": 18.7}
-            ]
+            return []
         except Exception as e:
             session.rollback()
             print(f"❌ General ERROR: {e}")
@@ -160,24 +150,7 @@ class graphicsSQLAlchemy(IGraphics):
         except SQLAlchemyError as e:
             session.rollback()
             print(f"Error al obtener datos de peso por períodos: {e}")
-            return [
-                {
-                    "period_id": 1,
-                    "start_hour": datetime.now().isoformat(),
-                    "end_hour": (datetime.now() + timedelta(hours=8)).isoformat(),
-                    "day_work": "Lunes",
-                    "avg_weight": 25.5,
-                    "readings_count": 45
-                },
-                {
-                    "period_id": 2,
-                    "start_hour": (datetime.now() - timedelta(days=1)).isoformat(),
-                    "end_hour": (datetime.now() - timedelta(days=1) + timedelta(hours=8)).isoformat(),
-                    "day_work": "Domingo",
-                    "avg_weight": 30.2,
-                    "readings_count": 52
-                }
-            ]
+            return []
         except Exception as e:
             session.rollback()
             print(f"Error inesperado al obtener datos de peso por períodos: {e}")
@@ -230,22 +203,7 @@ class graphicsSQLAlchemy(IGraphics):
         except SQLAlchemyError as e:
             session.rollback()
             print(f"Error al obtener datos de distancia acumulativa: {e}")
-            return [
-                {
-                    "period_id": 1,
-                    "distance_traveled": 5.2,
-                    "weight_waste": 15.3,
-                    "start_hour": datetime.now().isoformat(),
-                    "cumulative_distance": 5.2
-                },
-                {
-                    "period_id": 2,
-                    "distance_traveled": 3.8,
-                    "weight_waste": 12.1,
-                    "start_hour": (datetime.now() + timedelta(hours=1)).isoformat(),
-                    "cumulative_distance": 9.0
-                }
-            ]
+            return []
         except Exception as e:
             session.rollback()
             print(f"Error inesperado al obtener datos de distancia acumulativa: {e}")
@@ -295,22 +253,7 @@ class graphicsSQLAlchemy(IGraphics):
         except SQLAlchemyError as e:
             session.rollback()
             print(f"Error al obtener análisis de velocidad GPS: {e}")
-            return [
-                {
-                    "avg_speed": 25.5,
-                    "max_speed": 45.2,
-                    "min_speed": 5.1,
-                    "total_readings": 156,
-                    "date": datetime.now().date().isoformat()
-                },
-                {
-                    "avg_speed": 22.8,
-                    "max_speed": 38.7,
-                    "min_speed": 3.2,
-                    "total_readings": 142,
-                    "date": (datetime.now() - timedelta(days=1)).date().isoformat()
-                }
-            ]
+            return []
         except Exception as e:
             session.rollback()
             print(f"Error inesperado al obtener análisis de velocidad GPS: {e}")
